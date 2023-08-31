@@ -66,8 +66,8 @@ environment{
                     withAWS(credentials: 'aws-auth', region: "${REGION}") {
                         sh """
                         aws eks update-kubeconfig --region ${REGION} --name spot-cluster
-                        cd apache
-                        helm install apachetest . --set deployment.imageVersion=${VERSION}
+                        cd helm
+                        helm install myapache . 
                         """
                     }
                 }
