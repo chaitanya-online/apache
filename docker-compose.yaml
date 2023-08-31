@@ -1,0 +1,7 @@
+version: '3.9'
+services:
+  apache:
+    image: richeb/apachetest:v1
+    container_name: apache
+    ports:
+      - "8086:80"

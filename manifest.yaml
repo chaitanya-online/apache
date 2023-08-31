@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapachepod
+  labels:
+    name: apache
+    tier: frontend
+spec:
+  containers:
+    - name: myapachepod
+      image: richeb/apachetest:v1
+      ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapachepod-service
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    name: apache
+    tier: frontend

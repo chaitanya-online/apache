@@ -1,0 +1,22 @@
+replicaCount: 1
+image:
+  repository: richeb/apachetest
+  tag: v1
+  pullPolicy: IfNotPresent
+
+service:
+  name: myapachepod-service
+  type: LoadBalancer
+  port: 80
+  targetPort: 80
+
+pod:
+  name: myapachepod
+  labels:
+    name: apache
+    tier: frontend
+
+limitRange:
+  name: apache-limit-range
+  cpuMin: 100m
+  cpuMax: 500m    
