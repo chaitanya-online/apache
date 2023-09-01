@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
     - name: myapachepod
-      image: richeb/apachetest:v1
+      image: richeb/apachetest:latest
       ports:
         - containerPort: 80
 ---
