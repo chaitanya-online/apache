@@ -6,4 +6,6 @@ FROM httpd_image
 
 
 # Copy your index.html file
-COPY index.html /usr/local/apache2/htdocs/
+#COPY index.html /usr/local/apache2/htdocs/
+
+ADD index.html /usr/local/apache2/htdocs/
