@@ -66,7 +66,6 @@ environment{
                     withAWS(credentials: 'aws-auth', region: "${REGION}") {
                         sh """
                         aws eks update-kubeconfig --region ${REGION} --name spot-cluster-k8
-                        kubectl delete -f manifest.yaml
                         kubectl apply -f manifest.yaml 
                         """
                     }

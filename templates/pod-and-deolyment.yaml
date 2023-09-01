@@ -1,16 +1,23 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: {{ .Values.pod.name }}
-  labels:
-    name: apache
-    tier: frontend
+  name: {{ .Values.deployment.name }}
 spec:
-  containers:
-    - name: myapachepod
-      image: richeb/apachetest:{{ .Values.image.tag }}
-      ports:
-        - containerPort: 80
+  replicas: {{ .Values.deployment.replicas | default 1 }}
+  selector:
+    matchLabels:
+      app: {{ .Values.appLabel }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appLabel }}
+        tier: frontend
+    spec:
+      containers:
+        - name: myapachepod
+          image: richeb/apachetest:{{ .Values.image.tag }}
+          ports:
+            - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -23,9 +30,8 @@ spec:
       port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.targetPort }}
   selector:
-    name: apache
+    app: {{ .Values.appLabel }}
     tier: frontend
-
 ---
 apiVersion: v1
 kind: LimitRange
@@ -42,8 +48,3 @@ spec:
         cpu: {{ .Values.limitRange.cpuMax | default "500m" }}
       min:
         cpu: {{ .Values.limitRange.cpuMin | default "100m" }}
-
-
-
-
-

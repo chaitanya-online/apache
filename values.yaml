@@ -1,8 +1,13 @@
-replicaCount: 1
+# values.yaml
+
+deployment:
+  name: myapachepod-deployment
+  replicas: 2  # You can specify the desired number of replicas here
+
+appLabel: apache  # This should match the label used in your Deployment and Service
+
 image:
-  repository: richeb/apachetest
-  tag: latest
-  pullPolicy: IfNotPresent
+  tag: latest  # Replace with the desired Docker image tag
 
 service:
   name: myapachepod-service
@@ -10,13 +15,8 @@ service:
   port: 80
   targetPort: 80
 
-pod:
-  name: myapachepod
-  labels:
-    name: apache
-    tier: frontend
-
 limitRange:
-  name: apache-limit-range
-  cpuMin: 100m
-  cpuMax: 500m    
+  name: myapachepod-limit-range
+  cpuDefault: "100m"
+  cpuMax: "500m"
+  cpuMin: "100m"
