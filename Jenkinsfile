@@ -60,7 +60,7 @@ environment{
                 }
             }
         }
-    stage('Deployment'){
+    stage('Service'){
             steps{
                 script{
                     withAWS(credentials: 'aws-auth', region: "${REGION}") {
